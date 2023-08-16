@@ -1,8 +1,12 @@
 import { Box, Button, FormControl, FormErrorMessage, Input } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useAppDispatch } from '../../stores/hooks'
+import { createTodo } from '../../stores/slices/todo/todoSlice'
+
 
 const AddTodo = () => {
+    const dispatch = useAppDispatch();
 
     const { handleSubmit, 
             register, 
@@ -12,7 +16,7 @@ const AddTodo = () => {
     
         const onSubmit = (data:{content:string}) => {
             const {content} = data;
-            alert('追加完了')
+            dispatch(createTodo(content));
             reset()
         }
 

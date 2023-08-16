@@ -1,15 +1,12 @@
 import React from 'react'
 import { Center, Flex, Heading, StackDivider, VStack, Text } from '@chakra-ui/react'
 import TodoItem from './TodoItem'
+import { useAppSelector } from '../../stores/hooks'
+import { selectTodoList } from '../../stores/slices/todo/todoSlice'
 
 const TodoList = () => {
 
-    const todoList = [
-        { id: '001', content: 'test01', isDone: true },
-        { id: '002', content: 'test02', isDone: false },
-        { id: '003', content: 'test03', isDone: true },
-        { id: '004', content: 'test04', isDone: false },
-    ]
+    const todoList = useAppSelector(selectTodoList);
 
     return (
         <Flex flexDir='column' align='center'>
@@ -25,19 +22,22 @@ const TodoList = () => {
                 borderRadius='md'
                 p={4}
                 maxH='65vh'
-                overflow='scroll'
+            // overflow='scroll'
             >
                 {todoList.length === 0 ? (
                     <Text align='center' fontWeight='bold' fontSize='lg'>
                         Not Todo
                     </Text>
-                ): (
+                ) : (
                     todoList.map((item) => {
-                        return <TodoItem 
-                                    id={item.id} 
-                                    content={item.content} 
-                                    isDone={item.isDone} 
-                                />
+                        return (
+                            <TodoItem
+                                key={item.id}
+                                id={item.id}
+                                content={item.content}
+                                isDone={item.isDone}
+                            />
+                        )
                     })
                 )}
             </VStack>
