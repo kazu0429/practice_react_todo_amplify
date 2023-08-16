@@ -1,6 +1,6 @@
 import { Flex, Icon, Text } from '@chakra-ui/react';
 import React from 'react'
-import {RiCheckboxBlankCircleLine, RiCheckboxBlankFill, RiCheckboxCircleFill} from 'react-icons/ri'
+import {RiCheckboxBlankCircleLine, RiCheckboxBlankFill } from 'react-icons/ri'
 import {BsTrash} from 'react-icons/bs'
 
 type Props = {

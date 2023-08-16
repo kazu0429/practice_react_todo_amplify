@@ -13,7 +13,7 @@ const TodoList = () => {
 
     return (
         <Flex flexDir='column' align='center'>
-            <Center m={8}>
+            <Center mb={8}>
                 <Heading>Todo List</Heading>
             </Center>
             <VStack

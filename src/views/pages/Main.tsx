@@ -1,10 +1,14 @@
 import React from 'react'
 import TodoList from '../components/TodoList'
-import TodoItem from '../components/TodoItem'
+import AddTodo from '../components/AddTodo'
+import { VStack } from '@chakra-ui/react'
 
 const Main = () => {
   return (
-    <div><TodoList/></div>
+    <VStack spacing={4} align='stretch' p={8}>
+      <TodoList/>
+      <AddTodo/>
+    </VStack>
   )
 }
 
