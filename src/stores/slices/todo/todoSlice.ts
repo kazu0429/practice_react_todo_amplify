@@ -30,21 +30,20 @@ export const todoSlice = createSlice({
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
-        createTodo: (state, action) => {
-            const newTodo = { id: uuidv4(), content: action.payload, isDone: false };
-            state.todoList = [newTodo, ...state.todoList];
+        fetchTodoRealTime:(state,action) => {
+            state.todoList = [...state.todoList, action.payload];
         },
-        updateTodo: (state, action) => {
-            const todo = state.todoList.find((todo) => {
-                return todo.id === action.payload;
+        updateTodoRealTime:(state, action) => {
+            const targetTodo = state.todoList.find((todo) => {
+                return todo.id === action.payload.id;
             })
-            if (todo) {
-                todo.isDone = !todo.isDone;
+            if(targetTodo){
+                targetTodo.isDone=action.payload.isDone;
             }
         },
-        deleteTodo: (state, action) => {
+        deleteTodoRealTime:(state, action) => {
             state.todoList = state.todoList.filter((todo) => {
-                return todo.id !== action.payload;
+                return todo.id !== action.payload.id;
             })
         },
     },
@@ -58,7 +57,7 @@ export const todoSlice = createSlice({
     },
 });
 
-export const { createTodo, updateTodo, deleteTodo } = todoSlice.actions;
+export const { fetchTodoRealTime, updateTodoRealTime, deleteTodoRealTime } = todoSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
