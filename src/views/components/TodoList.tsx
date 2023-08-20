@@ -1,12 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Center, Flex, Heading, StackDivider, VStack, Text } from '@chakra-ui/react'
 import TodoItem from './TodoItem'
-import { useAppSelector } from '../../stores/hooks'
-import { selectTodoList } from '../../stores/slices/todo/todoSlice'
+import { useAppDispatch, useAppSelector } from '../../stores/hooks'
+import { fetchTodoListAsync, selectTodoList } from '../../stores/slices/todo/todoSlice'
+import { async } from 'q'
 
 const TodoList = () => {
 
     const todoList = useAppSelector(selectTodoList);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        const fetchTodoList = async() => {
+            await dispatch(fetchTodoListAsync())
+        }
+        fetchTodoList();
+    },[dispatch])
 
     return (
         <Flex flexDir='column' align='center'>
