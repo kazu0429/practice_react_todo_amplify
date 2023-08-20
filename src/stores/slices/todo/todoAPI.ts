@@ -1,5 +1,6 @@
 import { DataStore } from "aws-amplify";
 import { Todo } from "../../../models";
+import { async } from "q";
 
 export const createTodoApi = async(data:{content:string}) => {
     const {content} = data;
@@ -43,6 +44,22 @@ export const updateTodoApi = async(data:{id:string, isDone:boolean}) => {
                 updated.isDone = isDone;
             })
         )
+    }catch(err){
+        throw err
+    }
+}
+
+export const deleteTodoApi = async(data:{id:string}) => {
+    const {id} = data;
+    try{
+        const deleteTodo = await DataStore.query(Todo, id)
+
+        if(!deleteTodo){
+            alert('指定されたTodoはデータベース城に存在しません。');
+            return;
+        }
+
+        await DataStore.delete(deleteTodo)
     }catch(err){
         throw err
     }
