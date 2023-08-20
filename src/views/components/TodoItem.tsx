@@ -4,6 +4,8 @@ import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { BsTrash } from 'react-icons/bs'
 import { useAppDispatch } from '../../stores/hooks';
 import { updateTodo, deleteTodo } from '../../stores/slices/todo/todoSlice';
+import { updateTodoApi } from '../../stores/slices/todo/todoAPI';
+import { async } from 'q';
 
 type Props = {
     id: string;
@@ -13,8 +15,14 @@ type Props = {
 
 const TodoItem: React.VFC<Props> = ({ id, content, isDone }) => {
     const dispatch = useAppDispatch();
-    const handleUpdate = () => {
-        dispatch(updateTodo(id));
+    const handleUpdate = async() => {
+        try{
+            const switchIsDone = !isDone;
+            const data = {id, isDone:switchIsDone};
+            await updateTodoApi(data);
+        }catch(err){
+            throw err
+        }
     }
     const handleDelete = () => {
         dispatch(deleteTodo(id))
