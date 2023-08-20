@@ -15,3 +15,12 @@ export const createTodoApi = async(data:{content:string}) => {
         throw err;
     }
 }
+
+export const fetchTodoListApi = async() => {
+    try{
+        const todoList = await DataStore.query(Todo);
+        return todoList;
+    }catch(err){
+        throw err;
+    }
+}
