@@ -1,12 +1,10 @@
 import { Box, Button, FormControl, FormErrorMessage, Input } from '@chakra-ui/react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useAppDispatch } from '../../stores/hooks'
-import { createTodo } from '../../stores/slices/todo/todoSlice'
+import { createTodoApi } from '../../stores/slices/todo/todoAPI';
 
 
 const AddTodo = () => {
-    const dispatch = useAppDispatch();
 
     const { handleSubmit, 
             register, 
@@ -14,9 +12,8 @@ const AddTodo = () => {
             reset 
         } = useForm();
     
-        const onSubmit = (data:{content:string}) => {
-            const {content} = data;
-            dispatch(createTodo(content));
+        const onSubmit = async(data:{content:string}) => {
+            await createTodoApi(data);
             reset()
         }
 
