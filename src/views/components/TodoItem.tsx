@@ -3,7 +3,6 @@ import React from 'react'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { BsTrash } from 'react-icons/bs'
 import { useAppDispatch } from '../../stores/hooks';
-import { updateTodo, deleteTodo } from '../../stores/slices/todo/todoSlice';
 import { deleteTodoApi, updateTodoApi } from '../../stores/slices/todo/todoAPI';
 import { async } from 'q';
 
