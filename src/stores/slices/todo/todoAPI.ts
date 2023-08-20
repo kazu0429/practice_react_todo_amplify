@@ -24,3 +24,26 @@ export const fetchTodoListApi = async() => {
         throw err;
     }
 }
+
+export const updateTodoApi = async(data:{id:string, isDone:boolean}) => {
+    const {id, isDone} = data;
+    try{
+        // データベースの情報を取得
+        const original = await DataStore.query(Todo, id);
+
+        // データがない時
+        if(!original){
+            alert('指定されたTodoはデータベース城に存在しません。')
+            return;
+        }
+
+        // 更新
+        await DataStore.save(
+            Todo.copyOf(original, (updated) => {
+                updated.isDone = isDone;
+            })
+        )
+    }catch(err){
+        throw err
+    }
+}
